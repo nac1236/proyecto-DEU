@@ -24,7 +24,7 @@ const routes = [
       },
       {
         path: 'cursos/:id',
-        component: () => import('@/views/DetalleCursos.vue')
+        component: () => import('@/views/cursos/DetalleCursos.vue')
       },
       {
         path: 'tab3',

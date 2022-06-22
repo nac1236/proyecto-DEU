@@ -1,9 +1,6 @@
 <template>
-    <!-- <base-cursos> -->
-        <h1>Mis cursos</h1>
+    <tabs-base page-title="Mis cursos">
         <ion-list>
-          <!-- <ion-item>holaa</ion-item>
-          <ion-item>chauu</ion-item> -->
           <ion-item :key="curso.id" v-for="curso in cursos" :router-link="`cursos/${curso.id}`">
             <ion-label>
               <strong>{{curso.nombre}}</strong> <br>
@@ -12,24 +9,20 @@
           </ion-item>
 
         </ion-list>
-    <!-- </base-cursos> -->
+    </tabs-base>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
 import { IonList, IonItem, IonLabel } from '@ionic/vue';
-//import Tab2Page from '../views/Tab2Page.vue';
+import TabsBase from "./base/TabsBase.vue";
 
-export default defineComponent({
+export default({
   name: 'ListadoCursos',
-  // props: {
-  //   name: String
-  // },
   components: {
     IonList,
     IonItem,
     IonLabel,
-    //Tab2Page
+    TabsBase
   },
   computed: {
     cursos() {
