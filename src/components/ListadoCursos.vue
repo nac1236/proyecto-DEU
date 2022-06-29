@@ -1,8 +1,8 @@
 <template>
     <tabs-base page-title="Mis cursos">
         <ion-list>
-          <ion-item :key="curso.id" v-for="curso in cursos" :router-link="`cursos/${curso.id}`">
-            <ion-label>
+          <ion-item :key="curso.id" v-for="curso in cursos" :router-link="`cursos/${curso.id}`" >
+            <ion-label tabindex="0">
               <strong>{{curso.nombre}}</strong> <br>
               <p>Cant. de estudiantes: {{curso.estudiantes}}</p>
             </ion-label>
