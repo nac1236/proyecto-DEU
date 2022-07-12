@@ -8,7 +8,7 @@ namespace ProyectoDEU_API
         public Recurso()
         {
             EnlaceRecursos = new HashSet<EnlaceRecurso>();
-            Pregunta = new HashSet<Preguntum>();
+            Pregunta = new HashSet<Pregunta>();
         }
 
         public Guid Id { get; set; }
@@ -16,6 +16,6 @@ namespace ProyectoDEU_API
         public string Texto { get; set; } = null!;
 
         public virtual ICollection<EnlaceRecurso> EnlaceRecursos { get; set; }
-        public virtual ICollection<Preguntum> Pregunta { get; set; }
+        public virtual ICollection<Pregunta> Pregunta { get; set; }
     }
 }

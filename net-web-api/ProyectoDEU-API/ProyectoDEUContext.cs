@@ -20,7 +20,7 @@ namespace ProyectoDEU_API
         public virtual DbSet<Docente> Docentes { get; set; } = null!;
         public virtual DbSet<EnlaceRecurso> EnlaceRecursos { get; set; } = null!;
         public virtual DbSet<Estudiante> Estudiantes { get; set; } = null!;
-        public virtual DbSet<Preguntum> Pregunta { get; set; } = null!;
+        public virtual DbSet<Pregunta> Pregunta { get; set; } = null!;
         public virtual DbSet<Quiz> Quizzes { get; set; } = null!;
         public virtual DbSet<Recurso> Recursos { get; set; } = null!;
         public virtual DbSet<Respuestum> Respuesta { get; set; } = null!;
@@ -114,7 +114,7 @@ namespace ProyectoDEU_API
                         });
             });
 
-            modelBuilder.Entity<Preguntum>(entity =>
+            modelBuilder.Entity<Pregunta>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ProyectoDEU_API
 {
-    public partial class Preguntum
+    public partial class Pregunta
     {
-        public Preguntum()
+        public Pregunta()
         {
             Respuesta = new HashSet<Respuestum>();
         }

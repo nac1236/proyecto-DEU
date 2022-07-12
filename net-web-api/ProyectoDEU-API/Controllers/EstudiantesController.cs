@@ -89,6 +89,7 @@ namespace ProyectoDEU_API.Controllers
           {
               return Problem("Entity set 'ProyectoDEUContext.Estudiantes'  is null.");
           }
+            estudiante.Id = Guid.NewGuid();
             _context.Estudiantes.Add(estudiante);
             try
             {

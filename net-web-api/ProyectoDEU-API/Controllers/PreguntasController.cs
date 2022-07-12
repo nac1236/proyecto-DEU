@@ -11,55 +11,55 @@ namespace ProyectoDEU_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DocentesController : ControllerBase
+    public class PreguntasController : ControllerBase
     {
         private readonly ProyectoDEUContext _context;
 
-        public DocentesController(ProyectoDEUContext context)
+        public PreguntasController(ProyectoDEUContext context)
         {
             _context = context;
         }
 
-        // GET: api/Docentes
+        // GET: api/Preguntas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Docente>>> GetDocentes()
+        public async Task<ActionResult<IEnumerable<Pregunta>>> GetPregunta()
         {
-          if (_context.Docentes == null)
+          if (_context.Pregunta == null)
           {
               return NotFound();
           }
-            return await _context.Docentes.ToListAsync();
+            return await _context.Pregunta.ToListAsync();
         }
 
-        // GET: api/Docentes/5
+        // GET: api/Preguntas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Docente>> GetDocente(Guid id)
+        public async Task<ActionResult<Pregunta>> GetPregunta(Guid id)
         {
-          if (_context.Docentes == null)
+          if (_context.Pregunta == null)
           {
               return NotFound();
           }
-            var docente = await _context.Docentes.FindAsync(id);
+            var pregunta = await _context.Pregunta.FindAsync(id);
 
-            if (docente == null)
+            if (pregunta == null)
             {
                 return NotFound();
             }
 
-            return docente;
+            return pregunta;
         }
 
-        // PUT: api/Docentes/5
+        // PUT: api/Preguntas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDocente(Guid id, Docente docente)
+        public async Task<IActionResult> PutPregunta(Guid id, Pregunta pregunta)
         {
-            if (id != docente.Id)
+            if (id != pregunta.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(docente).State = EntityState.Modified;
+            _context.Entry(pregunta).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace ProyectoDEU_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DocenteExists(id))
+                if (!PreguntaExists(id))
                 {
                     return NotFound();
                 }
@@ -80,24 +80,23 @@ namespace ProyectoDEU_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Docentes
+        // POST: api/Preguntas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Docente>> PostDocente(Docente docente)
+        public async Task<ActionResult<Pregunta>> PostPregunta(Pregunta pregunta)
         {
-          if (_context.Docentes == null)
+          if (_context.Pregunta == null)
           {
-              return Problem("Entity set 'ProyectoDEUContext.Docentes'  is null.");
+              return Problem("Entity set 'ProyectoDEUContext.Pregunta'  is null.");
           }
-            docente.Id = Guid.NewGuid();
-            _context.Docentes.Add(docente);
+            _context.Pregunta.Add(pregunta);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (DocenteExists(docente.Id))
+                if (PreguntaExists(pregunta.Id))
                 {
                     return Conflict();
                 }
@@ -107,32 +106,32 @@ namespace ProyectoDEU_API.Controllers
                 }
             }
 
-            return CreatedAtAction("GetDocente", new { id = docente.Id }, docente);
+            return CreatedAtAction("GetPregunta", new { id = pregunta.Id }, pregunta);
         }
 
-        // DELETE: api/Docentes/5
+        // DELETE: api/Preguntas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDocente(Guid id)
+        public async Task<IActionResult> DeletePregunta(Guid id)
         {
-            if (_context.Docentes == null)
+            if (_context.Pregunta == null)
             {
                 return NotFound();
             }
-            var docente = await _context.Docentes.FindAsync(id);
-            if (docente == null)
+            var pregunta = await _context.Pregunta.FindAsync(id);
+            if (pregunta == null)
             {
                 return NotFound();
             }
 
-            _context.Docentes.Remove(docente);
+            _context.Pregunta.Remove(pregunta);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DocenteExists(Guid id)
+        private bool PreguntaExists(Guid id)
         {
-            return (_context.Docentes?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Pregunta?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

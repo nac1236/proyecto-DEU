@@ -7,7 +7,7 @@ namespace ProyectoDEU_API
     {
         public Quiz()
         {
-            Pregunta = new HashSet<Preguntum>();
+            Pregunta = new HashSet<Pregunta>();
             IdDocentes = new HashSet<Docente>();
         }
 
@@ -16,7 +16,7 @@ namespace ProyectoDEU_API
         public Guid IdCurso { get; set; }
 
         public virtual Curso IdCursoNavigation { get; set; } = null!;
-        public virtual ICollection<Preguntum> Pregunta { get; set; }
+        public virtual ICollection<Pregunta> Pregunta { get; set; }
 
         public virtual ICollection<Docente> IdDocentes { get; set; }
     }

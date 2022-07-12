@@ -10,6 +10,6 @@ namespace ProyectoDEU_API
         public byte EsCorrecta { get; set; }
         public Guid IdPregunta { get; set; }
 
-        public virtual Preguntum IdPreguntaNavigation { get; set; } = null!;
+        public virtual Pregunta IdPreguntaNavigation { get; set; } = null!;
     }
 }
