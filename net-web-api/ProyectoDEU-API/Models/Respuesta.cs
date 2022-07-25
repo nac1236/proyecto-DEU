@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ProyectoDEU_API
 {
-    public partial class Respuestum
+    public partial class Respuesta
     {
         public Guid Id { get; set; }
         public string Texto { get; set; } = null!;

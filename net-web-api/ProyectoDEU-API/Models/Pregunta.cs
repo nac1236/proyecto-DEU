@@ -7,7 +7,7 @@ namespace ProyectoDEU_API
     {
         public Pregunta()
         {
-            Respuesta = new HashSet<Respuestum>();
+            Respuesta = new HashSet<Respuesta>();
         }
 
         public Guid Id { get; set; }
@@ -17,6 +17,6 @@ namespace ProyectoDEU_API
 
         public virtual Quiz IdQuizNavigation { get; set; } = null!;
         public virtual Recurso? IdRecursoNavigation { get; set; }
-        public virtual ICollection<Respuestum> Respuesta { get; set; }
+        public virtual ICollection<Respuesta> Respuesta { get; set; }
     }
 }

@@ -11,55 +11,55 @@ namespace ProyectoDEU_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecursosController : ControllerBase
+    public class RespuestasController : ControllerBase
     {
         private readonly ProyectoDEUContext _context;
 
-        public RecursosController(ProyectoDEUContext context)
+        public RespuestasController(ProyectoDEUContext context)
         {
             _context = context;
         }
 
-        // GET: api/Recursos
+        // GET: api/Respuestas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recurso>>> GetRecursos()
+        public async Task<ActionResult<IEnumerable<Respuesta>>> GetRespuesta()
         {
-          if (_context.Recursos == null)
+          if (_context.Respuesta == null)
           {
               return NotFound();
           }
-            return await _context.Recursos.ToListAsync();
+            return await _context.Respuesta.ToListAsync();
         }
 
-        // GET: api/Recursos/5
+        // GET: api/Respuestas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recurso>> GetRecurso(Guid id)
+        public async Task<ActionResult<Respuesta>> GetRespuesta(Guid id)
         {
-          if (_context.Recursos == null)
+          if (_context.Respuesta == null)
           {
               return NotFound();
           }
-            var recurso = await _context.Recursos.FindAsync(id);
+            var respuesta = await _context.Respuesta.FindAsync(id);
 
-            if (recurso == null)
+            if (respuesta == null)
             {
                 return NotFound();
             }
 
-            return recurso;
+            return respuesta;
         }
 
-        // PUT: api/Recursos/5
+        // PUT: api/Respuestas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecurso(Guid id, Recurso recurso)
+        public async Task<IActionResult> PutRespuesta(Guid id, Respuesta respuesta)
         {
-            if (id != recurso.Id)
+            if (id != respuesta.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(recurso).State = EntityState.Modified;
+            _context.Entry(respuesta).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace ProyectoDEU_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecursoExists(id))
+                if (!RespuestaExists(id))
                 {
                     return NotFound();
                 }
@@ -80,24 +80,24 @@ namespace ProyectoDEU_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Recursos
+        // POST: api/Respuestas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recurso>> PostRecurso(Recurso recurso)
+        public async Task<ActionResult<Respuesta>> PostRespuesta(Respuesta respuesta)
         {
-            if (_context.Recursos == null)
+            if (_context.Respuesta == null)
             {
-                return Problem("Entity set 'ProyectoDEUContext.Recursos'  is null.");
+                return Problem("Entity set 'ProyectoDEUContext.Respuesta'  is null.");
             }
-            recurso.Id = Guid.NewGuid();
-            _context.Recursos.Add(recurso);
+            respuesta.Id = Guid.NewGuid();
+            _context.Respuesta.Add(respuesta);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (RecursoExists(recurso.Id))
+                if (RespuestaExists(respuesta.Id))
                 {
                     return Conflict();
                 }
@@ -107,32 +107,32 @@ namespace ProyectoDEU_API.Controllers
                 }
             }
 
-            return CreatedAtAction("GetRecurso", new { id = recurso.Id }, recurso);
+            return CreatedAtAction("GetRespuesta", new { id = respuesta.Id }, respuesta);
         }
 
-        // DELETE: api/Recursos/5
+        // DELETE: api/Respuestas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecurso(Guid id)
+        public async Task<IActionResult> DeleteRespuesta(Guid id)
         {
-            if (_context.Recursos == null)
+            if (_context.Respuesta == null)
             {
                 return NotFound();
             }
-            var recurso = await _context.Recursos.FindAsync(id);
-            if (recurso == null)
+            var respuesta = await _context.Respuesta.FindAsync(id);
+            if (respuesta == null)
             {
                 return NotFound();
             }
 
-            _context.Recursos.Remove(recurso);
+            _context.Respuesta.Remove(respuesta);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool RecursoExists(Guid id)
+        private bool RespuestaExists(Guid id)
         {
-            return (_context.Recursos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Respuesta?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

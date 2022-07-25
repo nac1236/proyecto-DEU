@@ -85,10 +85,11 @@ namespace ProyectoDEU_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Pregunta>> PostPregunta(Pregunta pregunta)
         {
-          if (_context.Pregunta == null)
-          {
-              return Problem("Entity set 'ProyectoDEUContext.Pregunta'  is null.");
-          }
+            if (_context.Pregunta == null)
+            {
+                return Problem("Entity set 'ProyectoDEUContext.Pregunta'  is null.");
+            }
+            pregunta.Id = Guid.NewGuid();
             _context.Pregunta.Add(pregunta);
             try
             {

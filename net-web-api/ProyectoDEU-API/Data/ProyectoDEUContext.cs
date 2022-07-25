@@ -23,7 +23,7 @@ namespace ProyectoDEU_API
         public virtual DbSet<Pregunta> Pregunta { get; set; } = null!;
         public virtual DbSet<Quiz> Quizzes { get; set; } = null!;
         public virtual DbSet<Recurso> Recursos { get; set; } = null!;
-        public virtual DbSet<Respuestum> Respuesta { get; set; } = null!;
+        public virtual DbSet<Respuesta> Respuesta { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -154,7 +154,7 @@ namespace ProyectoDEU_API
                 entity.Property(e => e.Titulo).HasMaxLength(100);
             });
 
-            modelBuilder.Entity<Respuestum>(entity =>
+            modelBuilder.Entity<Respuesta>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 

@@ -11,55 +11,55 @@ namespace ProyectoDEU_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecursosController : ControllerBase
+    public class QuizzesController : ControllerBase
     {
         private readonly ProyectoDEUContext _context;
 
-        public RecursosController(ProyectoDEUContext context)
+        public QuizzesController(ProyectoDEUContext context)
         {
             _context = context;
         }
 
-        // GET: api/Recursos
+        // GET: api/Quizzes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recurso>>> GetRecursos()
+        public async Task<ActionResult<IEnumerable<Quiz>>> GetQuizzes()
         {
-          if (_context.Recursos == null)
+          if (_context.Quizzes == null)
           {
               return NotFound();
           }
-            return await _context.Recursos.ToListAsync();
+            return await _context.Quizzes.ToListAsync();
         }
 
-        // GET: api/Recursos/5
+        // GET: api/Quizzes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recurso>> GetRecurso(Guid id)
+        public async Task<ActionResult<Quiz>> GetQuiz(Guid id)
         {
-          if (_context.Recursos == null)
+          if (_context.Quizzes == null)
           {
               return NotFound();
           }
-            var recurso = await _context.Recursos.FindAsync(id);
+            var quiz = await _context.Quizzes.FindAsync(id);
 
-            if (recurso == null)
+            if (quiz == null)
             {
                 return NotFound();
             }
 
-            return recurso;
+            return quiz;
         }
 
-        // PUT: api/Recursos/5
+        // PUT: api/Quizzes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecurso(Guid id, Recurso recurso)
+        public async Task<IActionResult> PutQuiz(Guid id, Quiz quiz)
         {
-            if (id != recurso.Id)
+            if (id != quiz.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(recurso).State = EntityState.Modified;
+            _context.Entry(quiz).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace ProyectoDEU_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecursoExists(id))
+                if (!QuizExists(id))
                 {
                     return NotFound();
                 }
@@ -80,24 +80,25 @@ namespace ProyectoDEU_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Recursos
+        // POST: api/Quizzes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recurso>> PostRecurso(Recurso recurso)
+        public async Task<ActionResult<Quiz>> PostQuiz(Quiz quiz)
         {
-            if (_context.Recursos == null)
+            if (_context.Quizzes == null)
             {
-                return Problem("Entity set 'ProyectoDEUContext.Recursos'  is null.");
+                return Problem("Entity set 'ProyectoDEUContext.Quizzes'  is null.");
             }
-            recurso.Id = Guid.NewGuid();
-            _context.Recursos.Add(recurso);
+
+            quiz.Id = Guid.NewGuid();
+            _context.Quizzes.Add(quiz);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (RecursoExists(recurso.Id))
+                if (QuizExists(quiz.Id))
                 {
                     return Conflict();
                 }
@@ -107,32 +108,32 @@ namespace ProyectoDEU_API.Controllers
                 }
             }
 
-            return CreatedAtAction("GetRecurso", new { id = recurso.Id }, recurso);
+            return CreatedAtAction("GetQuiz", new { id = quiz.Id }, quiz);
         }
 
-        // DELETE: api/Recursos/5
+        // DELETE: api/Quizzes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecurso(Guid id)
+        public async Task<IActionResult> DeleteQuiz(Guid id)
         {
-            if (_context.Recursos == null)
+            if (_context.Quizzes == null)
             {
                 return NotFound();
             }
-            var recurso = await _context.Recursos.FindAsync(id);
-            if (recurso == null)
+            var quiz = await _context.Quizzes.FindAsync(id);
+            if (quiz == null)
             {
                 return NotFound();
             }
 
-            _context.Recursos.Remove(recurso);
+            _context.Quizzes.Remove(quiz);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool RecursoExists(Guid id)
+        private bool QuizExists(Guid id)
         {
-            return (_context.Recursos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Quizzes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
