@@ -18,7 +18,7 @@
 <script>
 import { defineComponent } from 'vue';
 import {  IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonBackButton } from '@ionic/vue';
-import axios from 'axios';
+//import axios from 'axios';
 
 export default defineComponent({
   name: 'DetalleCursos',
@@ -29,9 +29,9 @@ export default defineComponent({
     };
   },
   mounted() {
-    console.log("Estoy imprimiendo!");
-    axios.get("https://localhost:7223/api/Docentes/3fa85f64-5717-4562-b3fc-2c963f66afa6")
-    .then(response => console.log(response));
+    //console.log("Estoy imprimiendo!");
+    /*axios.get("/api/Docentes/3fa85f64-5717-4562-b3fc-2c963f66afa6")
+    .then(response => console.log(response));*/
   }
   /*computed: {
     loadedCurso() {

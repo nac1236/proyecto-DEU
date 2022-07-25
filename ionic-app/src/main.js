@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
 import store from './store';
+import axios from 'axios';
+import { loading } from './views/overlay-views/loading.js'
 
 import { IonicVue } from '@ionic/vue';
 
@@ -24,10 +26,14 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/* Axios config */
+axios.defaults.baseURL = "https://localhost:7223/"
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(store);
+  .use(store)
+  .use(loading);
 
 router.isReady().then(() => {
   app.mount('#app');

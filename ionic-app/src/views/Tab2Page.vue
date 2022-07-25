@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ListadoCursos from '../components/ListadoCursos.vue';
+import ListadoCursos from './cursos/ListadoCursos.vue';
 import { IonPage } from '@ionic/vue'
 
 export default ({

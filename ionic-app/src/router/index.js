@@ -36,6 +36,14 @@ const routes = [
         component: () => import('@/views/cursos/DetalleCursos.vue')
       },
       {
+        path: 'cursos/add',
+        component: () => import('@/views/cursos/CrearCursoPage.vue')
+      },
+      {
+        path: 'cursos/update/:id',
+        component: () => import('@/views/cursos/ModificarCursoPage.vue')
+      },
+      {
         path: 'tab3',
         component: () => import('@/views/Tab3Page.vue')
       }
