@@ -14,11 +14,13 @@ namespace ProyectoDEU_API.Models.Authentication
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
+        public bool EsDocente { get; set; }
+
         //estos 3 atributos capaz podemos borrarlos
-        public Guid? UserId { get; set; }
+        //public Guid? UserId { get; set; }
 
-        public LoginStatus Status { get; set; }
+        //public LoginStatus Status { get; set; }
 
-        public List<string> Errors { get; set; }
+        //public List<string> Errors { get; set; }
     }
 }

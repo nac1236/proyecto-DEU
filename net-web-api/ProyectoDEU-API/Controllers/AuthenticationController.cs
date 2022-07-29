@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ProyectoDEU_API.Models.Authentication;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,12 +15,18 @@ namespace ProyectoDEU_API.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly RoleManager<AppRole> roleManager;
         private readonly IConfiguration _configuration;
+        private readonly ProyectoDEUContext _context;
 
-        public AuthenticationController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IConfiguration configuration)
+
+        public AuthenticationController(UserManager<AppUser> userManager, 
+                                        RoleManager<AppRole> roleManager, 
+                                        IConfiguration configuration, 
+                                        ProyectoDEUContext proyectoDEUContext)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this._configuration = configuration;
+            this._context = proyectoDEUContext;
         }
 
         [HttpPost]
@@ -108,6 +115,7 @@ namespace ProyectoDEU_API.Controllers
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username
             };
+
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response
@@ -116,6 +124,48 @@ namespace ProyectoDEU_API.Controllers
                     Message = "User creation failed! Please check user details and try again.",
                     Errors = result.Errors.Select(e => e.Description).ToList()
                 });
+
+            if (model.EsDocente)
+            {
+                if (!await roleManager.RoleExistsAsync(UserRoles.Docente))
+                    await roleManager.CreateAsync(new AppRole(UserRoles.Docente));
+
+                if (await roleManager.RoleExistsAsync(UserRoles.Docente))
+                {
+                    await userManager.AddToRoleAsync(user, UserRoles.Docente);
+                }
+
+                _context.Docentes.Add(new Docente
+                {
+                    Nombre = user.UserName,
+                    Id = Guid.NewGuid()
+                });
+            }
+            else // es estudiante
+            {
+                if (!await roleManager.RoleExistsAsync(UserRoles.Estudiante))
+                    await roleManager.CreateAsync(new AppRole(UserRoles.Estudiante));
+
+                if (await roleManager.RoleExistsAsync(UserRoles.Estudiante))
+                {
+                    await userManager.AddToRoleAsync(user, UserRoles.Estudiante);
+                }
+
+                _context.Estudiantes.Add(new Estudiante
+                {
+                    Nombre = user.UserName,
+                    Id = Guid.NewGuid()
+                });
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                return Conflict();
+            }
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }

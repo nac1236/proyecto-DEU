@@ -3,13 +3,13 @@
     public class LoginResponse
     {
         public string Username { get; set; }
-        public string Email { get; set; }
+        //public string Email { get; set; }
         public bool IsValid { get; set; }
         public string AuthToken { get; set; }
         public Guid? SessionId { get; set; }
         public LoginStatus Status { get; set; }
         public string StatusText { get; set; }
-        public Guid? UserId { get; set; }
+        //public Guid? UserId { get; set; }
     }
 
     public enum LoginStatus
